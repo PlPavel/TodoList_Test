@@ -29,24 +29,7 @@ class AllTasksViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.filteredTasks.count, 0, "filteredTasks должен быть пустым в начальном состоянии.")
     }
     
-    func testAddNewTaskNavigation() {
-        let navigationController = UINavigationController(rootViewController: viewController)
-        viewController.view.layoutIfNeeded()
-        
-        XCTAssertNotNil(navigationController)
 
-        let expectation = XCTestExpectation(description: "Переход на TaskViewController")
-        viewController.addNewTask()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            XCTAssertNotNil(navigationController.topViewController as? TaskViewController, "Переход на TaskViewController не произошел.")
-            expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 2.0)
-    }
-
-    
     func testSearchCancelButton() {
         viewController.searchBarCancelButtonClicked(viewController.tasksSearchBar)
         

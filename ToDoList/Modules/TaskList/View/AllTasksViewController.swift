@@ -64,10 +64,8 @@ class AllTasksViewController: UIViewController {
     }()
 
     @objc func addNewTask(){
-        let vc = TaskViewController()
-        vc.newElement = true
-        vc.delegate = self
-        navigationController?.pushViewController(vc, animated: true)
+        let taskDetailVC = TaskRouter.createModule(oldTitle: nil, oldInfo: nil, isNewTask: true, delegate: self)
+        navigationController?.pushViewController(taskDetailVC, animated: true)
     }
     
     internal var filteredTasks: [Tasks] = []
@@ -186,13 +184,10 @@ extension AllTasksViewController: UITableViewDelegate, UITableViewDataSource {
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             
             let editAction = UIAction(title: "Редактировать", image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
-                let vc = TaskViewController()
-                vc.modalPresentationStyle = .fullScreen
-                vc.oldTitleTask = title
-                vc.oldInfoTask = info
-                vc.newElement = false
-                vc.delegate = self
-                self?.navigationController?.pushViewController(vc, animated: true)
+                guard let self = self else {return}
+                let taskDetailVC = TaskRouter.createModule(oldTitle: title, oldInfo: info, isNewTask: false, delegate: self)
+                taskDetailVC.modalPresentationStyle = .fullScreen
+                self.navigationController?.pushViewController(taskDetailVC, animated: true)
             }
             
             let shareAction = UIAction(title: "Поделиться", image: UIImage(systemName: "square.and.arrow.up")) { _ in
