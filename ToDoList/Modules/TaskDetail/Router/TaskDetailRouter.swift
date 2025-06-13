@@ -6,7 +6,7 @@ class TaskRouter: TaskRouterProtocol {
     
     weak var delegate: TaskUpdaterDelegate?
     
-    static func createModule(oldTitle: String?, oldInfo: String?, isNewTask: Bool, delegate: TaskUpdaterDelegate) -> TaskDetailViewController {
+    static func createModule(oldTitle: String?, oldInfo: String?, isNewTask: Bool, delegate: TaskUpdaterDelegate?) -> TaskDetailViewController {
         let view = TaskDetailViewController()
         let interactor = TaskInteractor()
         let router = TaskRouter()

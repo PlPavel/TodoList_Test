@@ -14,6 +14,7 @@ extension Tasks {
     @NSManaged public var info: String?
     @NSManaged public var date: String?
     @NSManaged public var completed: Bool
+    @NSManaged public var createdAt: Date?
     
 }
 

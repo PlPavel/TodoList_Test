@@ -33,13 +33,14 @@ class TaskPresenter: TaskPresenterProtocol {
     }
     
     func saveTask(title: String, info: String) {
-        delegate?.didSaveTask()
         if isNewTask {
             interactor?.saveTask(title: title, info: info) {
+                self.delegate?.didSaveTask()
                 self.router?.navigateBack()
             }
         } else {
             interactor?.updateTask(oldTitle: oldTitle ?? "", oldInfo: oldInfo ?? "", title: title, info: info) {
+                self.delegate?.didSaveTask()
                 self.router?.navigateBack()
             }
         }

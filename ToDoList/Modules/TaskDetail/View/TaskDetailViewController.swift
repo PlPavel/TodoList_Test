@@ -36,6 +36,11 @@ class TaskDetailViewController: UIViewController, UITextViewDelegate {
         presenter?.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            titleTask.becomeFirstResponder()
+        }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         presenter?.saveTask(title: titleTask.text ?? "", info: taskText.text ?? "")
